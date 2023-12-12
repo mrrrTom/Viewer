@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:drawable="clr-namespace:Graphology"
+             x:Class="Graphology.MainPage">
+    <ContentPage.Resources>
+        <drawable:GraphView x:Key="drawable" />
+    </ContentPage.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Entry Placeholder="Enter directory" 
+                   TextChanged="OnEntryTextChanged" 
+                   HorizontalOptions="Start"
+                   ClearButtonVisibility="WhileEditing"
+                   Completed="OnEntryCompleted"/>
+            <Button HorizontalOptions="End" Text="Refresh" Clicked="OnRefreshClicked"/>
+        </Grid>
+        <GraphicsView Grid.Row="1" Drawable="{StaticResource drawable}">
+            <!--<ContextActions>
+                    <MenuFlyoutItem Text="Rename" />
+                    <MenuFlyoutItem Text="Open" />
+                    <MenuFlyoutItem Text="Open in program" />
+                    <MenuFlyoutItem Text="Add edge" />
+                    <MenuFlyoutItem Text="Delete" />
+            </ContextActions>-->
+            <GraphicsView.GestureRecognizers>
+                <PointerGestureRecognizer PointerEntered="OnPointerEntered"
+                                  PointerExited="OnPointerExited"
+                                  PointerMoved="OnPointerMoved" />
+                <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"
+                              NumberOfTapsRequired="2" />
+                <PanGestureRecognizer PanUpdated="OnPanUpdated" />
+            </GraphicsView.GestureRecognizers>
+        </GraphicsView>
+    </Grid>
+</ContentPage>
